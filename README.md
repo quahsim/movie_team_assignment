@@ -1,6 +1,9 @@
 # movie_team_assignment
 
 
+박근균-----------------
+
+
 
 
 
@@ -17,4 +20,3 @@ ssong sa mu el
 git hub silhum
 
 ### JihoBranchTest!!!
-
