@@ -1,6 +1,9 @@
 # movie_team_assignment
 
 
+Quahsim checking
+
+
 박근균-----------------
 
 
@@ -30,4 +33,8 @@ git hub silhum
 
 ### JihoBranchTest!!!
 
+
+
+
 <!-- 수정 4차입니다. 송사무엘 라라라라라라라 -->
+
