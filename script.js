@@ -20,7 +20,7 @@ const moviesContainer = document.getElementById('movie_container');
 
 //영화카드 생성 기능
 const createMovieCard = movie => {
-  const { id, title, overview, poster_path, vote_average } = movie;
+  const { id, title, poster_path} = movie;
 
   //영화카드의 elements 지정
   const movieCard = document.createElement('div');
