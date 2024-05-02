@@ -36,8 +36,8 @@ const createMovieCard = movie => {
   //위 영화정보를 영화카드로 연동
   moviePoster.src = `https://image.tmdb.org/t/p/w500${poster_path}`;
   titleElement.textContent = title;
-  voteAvgElement.textContent = `<Vote Average: ${parseFloat(vote_average).toFixed(2)}>`;
-  overviewElement.textContent = overview;
+  // voteAvgElement.textContent = `<Vote Average: ${parseFloat(vote_average).toFixed(2)}>`;
+  // overviewElement.textContent = overview;
 
   //moviesContainer에 하기 정보들을 추가 (append = 추가)
   movieCard.appendChild(moviePoster);
