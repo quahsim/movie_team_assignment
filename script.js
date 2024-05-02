@@ -94,9 +94,17 @@ const renderMovies = movies => {
     location.reload();
   });
 
-  //검색 버튼 기능
+  // //검색 버튼 기능 + hover 기능 추가
   const searchBtn = document.getElementById('search-button');
   searchBtn.addEventListener('click', searchMovies);
+  searchBtn.addEventListener('click', function () {
+    var img = this.querySelector('img');
+    img.style.transform = 'scale(0.8)';
+    setTimeout(function () {
+      img.style.transform = 'scale(1)';
+    }, 70); // Reset the scale after 200 milliseconds
+  });;
+
 
   //검색어 입력 & 검색 후 'Enter'키 누르면 검색 기능 실행
   const searchInput = document.getElementById('search-input');
