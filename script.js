@@ -6,9 +6,11 @@ const options = {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNjEwZDY1MTg3MGQwNTIxYWQ5ZGNiZTExYjU3NzU3MiIsInN1YiI6IjY2MjljYjliNDNjZDU0MDEyMTg0NDkyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ktYaXCNxyt3gBJOwc-VM1xHMJmE760miOgotjGWRju0'
   }
 };
+// API URL 선언
+const apiUrl = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
 
 //TMDB API에서 제일 인기있는 영화들을 fetch
-fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+fetch(apiUrl, options)
   .then(response => response.json())
   .then(response => renderMovies(response.results))
   .catch(err => console.error(err));
@@ -59,10 +61,13 @@ const renderMovies = movies => {
     const movieCard = createMovieCard(movie);
     moviesContainer.appendChild(movieCard);
 
-    //영화카드 클릭시 영화ID 알림창 
+    //영화카드 클릭시 상세페이지 이동
     movieCard.addEventListener('click', () => {
-      const movieID = movieCard.getAttribute('id');
-      alert(`영화의 ID는 ${movieID}`);
+      localStorage.setItem('movie', JSON.stringify(movie));
+      //새로운 페이지 URL 생성
+      const newPageURL = `movie-detail.html`;
+      // 새로운 페이지로 이동
+      window.location.href = newPageURL;
     })
   });
 
@@ -73,7 +78,7 @@ const renderMovies = movies => {
     if (!searchTerm) return;
 
     try {
-      const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options);
+      const response = await fetch(apiUrl, options);
       const data = await response.json();
       const filteredMovies = data.results.filter(movie => movie.title.toLowerCase().includes(searchTerm));
       renderMovies(filteredMovies);
