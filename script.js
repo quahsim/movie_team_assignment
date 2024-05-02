@@ -26,17 +26,12 @@ const createMovieCard = movie => {
   const movieCard = document.createElement('div');
   const moviePoster = document.createElement('img');
   const titleElement = document.createElement('h1');
-  const voteAvgElement = document.createElement('p');
-  const overviewElement = document.createElement('p');
   movieCard.setAttribute('id', id);
-
 
   //클라스 지정
   movieCard.className = 'movie-card';
   moviePoster.className = 'movie-poster';
   titleElement.className = 'title';
-  voteAvgElement.className = 'vote-average';
-  overviewElement.className = 'overview';
 
   //위 영화정보를 영화카드로 연동
   moviePoster.src = `https://image.tmdb.org/t/p/w500${poster_path}`;
@@ -47,8 +42,7 @@ const createMovieCard = movie => {
   //moviesContainer에 하기 정보들을 추가 (append = 추가)
   movieCard.appendChild(moviePoster);
   movieCard.appendChild(titleElement);
-  movieCard.appendChild(voteAvgElement);
-  movieCard.appendChild(overviewElement);
+
 
 
   return movieCard;
