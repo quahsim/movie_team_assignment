@@ -69,6 +69,7 @@ const renderMovies = movies => {
   //영화 검색 기능
   const searchMovies = async () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
+    // ! = NOT
     if (!searchTerm) return;
 
     try {
