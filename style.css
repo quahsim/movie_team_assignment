@@ -5,6 +5,11 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.fas, .bi { /*별 아이콘*/
+  font-size: 50px; /* 아이콘 크기 설정 */
+  color: gold; /* 아이콘 색상 설정 */
+}
+
 .header-container {
   background-color: black;
   text-align: center;
