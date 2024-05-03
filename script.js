@@ -9,10 +9,28 @@ const options = {
 // API URL 선언
 const apiUrl = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
 
+//검색 정보를 저장
+function saveSearchValue(value) {
+  localStorage.setItem('searchValue', JSON.stringify(value));
+}
+
+//이전 검색 결과가 있으면 불러온다
+function loadingSearchValue(data) {
+  const searchTerm_storage = JSON.parse(localStorage.getItem('searchValue')); //JSON파일을 다시 문자열로 바꾼다.
+
+  if (searchTerm_storage === null || localStorage.getItem('fromIndex') === null) { //만약 저장된 검색 결과가 없으면 영화 카드를 모두 생성한다.
+    renderMovies(data);
+    return;
+  }
+  localStorage.removeItem('fromIndex'); // 필요없어졌으므로 삭제
+  const filteredMovies = data.filter(movie => movie.title.toLowerCase().includes(searchTerm_storage)); //저장된 검색 결과가 있으면 검색한 결과만 생성한다.
+  renderMovies(filteredMovies);
+}
+
 //TMDB API에서 제일 인기있는 영화들을 fetch
 fetch(apiUrl, options)
   .then(response => response.json())
-  .then(response => renderMovies(response.results))
+  .then(response => loadingSearchValue(response.results))
   .catch(err => console.error(err));
 
 //영화 카드들을 담을 수 있는 container element
@@ -69,6 +87,7 @@ const renderMovies = movies => {
     // ! = NOT
     if (!searchTerm) return;
 
+    saveSearchValue(searchTerm); //검색 정보를 저장
     try {
       const response = await fetch(apiUrl, options);
       const data = await response.json();
@@ -84,6 +103,7 @@ const renderMovies = movies => {
   // header-image 클릭시 페이지 새로고침
   const title = document.querySelector('.header-image');
   title.addEventListener('click', () => {
+    localStorage.removeItem('searchValue'); //검색 결과를 삭제한다. 
     location.reload();
   });
 
@@ -105,5 +125,10 @@ const renderMovies = movies => {
     if (event.key === 'Enter') {
       searchMovies();
     }
+  });
+
+  //html창이 종료될 때 
+  window.addEventListener('unload', function () {
+    localStorage.removeItem('fromIndex'); // 상세 페이지로 왔다는 것을 표시
   });
 };
