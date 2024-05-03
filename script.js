@@ -1,4 +1,4 @@
-//TMDB API키
+// TMDB API키
 const options = {
   method: 'GET',
   headers: {
@@ -75,6 +75,7 @@ const renderMovies = movies => {
       // 클릭된 영화 카드의 ID 가져오기
       const clickedMovieId = event.currentTarget.id;
       //새로운 페이지 URL 생성
+      // const newPageURL = `detail.html`;
       const newPageURL = `detail.html`;
       // 새로운 페이지로 이동
       window.location.href = newPageURL;

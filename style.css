@@ -157,16 +157,12 @@ body {
   margin: 10px;
 }
 
-.ID {
+.ID, .PW {
   margin: 10px;
 }
 
 .prevPW {
   font-weight: bold;
-  margin: 10px;
-}
-
-.PW {
   margin: 10px;
 }
 

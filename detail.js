@@ -74,9 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputValue = PWInput.value.trim();
     const length = inputValue.length;
 
-    // 입력된 값 대신 *로 표시
-    const maskedValue = '*'.repeat(length);
-    PWInput.value = maskedValue;
+    // // 입력된 값 대신 *로 표시
+    // const maskedValue = '*'.repeat(length);
+    // PWInput.value = maskedValue;
   });
 
   // Finish 버튼 클릭 시 저장
