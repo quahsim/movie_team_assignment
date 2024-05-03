@@ -20,7 +20,7 @@ const moviesContainer = document.getElementById('movie_container');
 
 //영화카드 생성 기능
 const createMovieCard = movie => {
-  const { id, title, poster_path} = movie;
+  const { id, title, poster_path } = movie;
 
   //영화카드의 elements 지정
   const movieCard = document.createElement('div');
@@ -52,10 +52,12 @@ const renderMovies = movies => {
     moviesContainer.appendChild(movieCard);
 
     //영화카드 클릭시 상세페이지 이동
-    movieCard.addEventListener('click', () => {
+    movieCard.addEventListener('click', (event) => {
       localStorage.setItem('movie', JSON.stringify(movie));
+      // 클릭된 영화 카드의 ID 가져오기
+      const clickedMovieId = event.currentTarget.id;
       //새로운 페이지 URL 생성
-      const newPageURL = `movie-detail.html`;
+      const newPageURL = `detail.html`;
       // 새로운 페이지로 이동
       window.location.href = newPageURL;
     })

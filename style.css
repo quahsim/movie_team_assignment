@@ -35,8 +35,7 @@ body {
 }
 
 #search-button {
-  /* background-color: transparent; */
-  background-color: gray;
+  background-color: transparent;
   border: none;
   padding-left: 10px;
 }
@@ -78,21 +77,6 @@ body {
   /* Scale up the image on hover */
 }
 
-.movie-ir {
-  width: calc(100% - 20px);
-  height: 675px;
-  padding: 10px;
-  margin: 10px 10px 10px 10px;
-  /* display: flex; */
-  /* Use flexbox layout */
-  flex-direction: column;
-  /* Arrange child elements vertically */
-  border: 1px solid rgb(255, 64, 6);
-  box-sizing: border-box;
-  border-radius: 5px;
-  background-color: white;
-}
-
 .movie-info {
   display: flex;
 }
@@ -112,7 +96,6 @@ body {
     /* Show 2 movie cards per row for screens <= 480px */
   }
 }
-
 .movie-poster {
   width: auto;
   height: 100%;
@@ -126,4 +109,66 @@ body {
   text-align: center;
   font-size: calc(2.3px + 1vw);
   margin-top: 13px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 10px 10px 10px;
+  /* display: flex; */
+  /* Use flexbox layout */
+  flex-direction: column;
+  /* Arrange child elements vertically */
+  border: 1px solid rgb(255, 64, 6);
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.btn {
+  width: calc(100% - 20px);
+  margin: 10px;
+}
+
+.login {
+  width: calc(100% - 20px);
+  background-color: aquamarine;
+  margin: 10px;
+}
+
+.IP {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 0 25%; /* 4개의 아이템이 가로로 배열되도록 설정 */
+  padding: 0 5px; /* 각 아이템 간의 간격 설정 */
+}
+
+.prevID {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.ID {
+  margin: 10px;
+}
+
+.prevPW {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.PW {
+  margin: 10px;
+}
+
+.RV {
+  width: calc(100% - 20px);
+  height: 50px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
