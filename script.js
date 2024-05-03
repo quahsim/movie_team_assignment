@@ -1,4 +1,4 @@
-//TMDB API키
+// TMDB API키
 const options = {
   method: 'GET',
   headers: {
@@ -70,11 +70,13 @@ const renderMovies = movies => {
     moviesContainer.appendChild(movieCard);
 
     //영화카드 클릭시 상세페이지 이동
-    movieCard.addEventListener('click', () => {
+    movieCard.addEventListener('click', (event) => {
       localStorage.setItem('movie', JSON.stringify(movie));
-
+      // 클릭된 영화 카드의 ID 가져오기
+      const clickedMovieId = event.currentTarget.id;
       //새로운 페이지 URL 생성
-      const newPageURL = `movie-detail.html`;
+      // const newPageURL = `detail.html`;
+      const newPageURL = `detail.html`;
       // 새로운 페이지로 이동
       window.location.href = newPageURL;
     })
@@ -83,6 +85,7 @@ const renderMovies = movies => {
   //영화 검색 기능
   const searchMovies = async () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
+    // ! = NOT
     if (!searchTerm) return;
 
     saveSearchValue(searchTerm); //검색 정보를 저장
