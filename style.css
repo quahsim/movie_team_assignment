@@ -5,10 +5,17 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-.fas, .bi { /*별 아이콘*/
-  font-size: 40px; /* 아이콘 크기 설정 */
-  color: gold; /* 아이콘 색상 설정 */
+
+.fas,
+.bi {
+  /*별 아이콘*/
+  font-size: 15px;
+  /* 아이콘 크기 설정 */
+  color: gold;
+  /* 아이콘 색상 설정 */
 }
+
+/* INDEX HTML */
 
 .header-container {
   background-color: black;
@@ -79,11 +86,6 @@ body {
 
 .movie-card:hover {
   transform: scale(1.05);
-  /* Scale up the image on hover */
-}
-
-.movie-info {
-  display: flex;
 }
 
 /* Adjust layout for smaller screens */
@@ -101,6 +103,7 @@ body {
     /* Show 2 movie cards per row for screens <= 480px */
   }
 }
+
 .movie-poster {
   width: auto;
   height: 100%;
@@ -116,22 +119,89 @@ body {
   margin-top: 13px;
 }
 
-.card-title {
-  font-weight: bold;
+/* MOVIE-DETAIL HTML */
+
+#movie-detail {
+  width: 80%; /* Example width, adjust as needed */
+  margin: 0 auto; /* 가운데로 배열 (포스터, 줄거리, 제목, 평 */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.movie-info{
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#back-button{
+  width:85%;
 }
 
 .card {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin: 10px 10px 10px 10px;
-  /* display: flex; */
-  /* Use flexbox layout */
+  padding: 40px;
+  margin: 30px 70px 70px 70px;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  background-color: rgb(44, 44, 44);
+  color: white;
+}
+
+.card-poster {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+.card-body {
+  margin-left: 10px;
+  padding-right: 10px;
+  display: flex;
   flex-direction: column;
-  /* Arrange child elements vertically */
-  border: 1px solid rgb(255, 64, 6);
-  box-sizing: border-box;
-  border-radius: 5px;
-  background-color: white;
+  width: 100%;
+}
+
+.card-title {
+  font-size: 2.3vw;
+  font-weight: bolder;
+}
+
+.card-text {
+  font-size: 1.5vwpx;
+  font-style: italic;
+}
+
+/* Adjust font size and layout for smaller screens */
+@media screen and (max-width: 768px) {
+  .card {
+    padding: 20px;
+    margin: 20px 5%;
+  }
+
+  .card-body {
+    width: 70%;
+  }
+
+  .card-title {
+    font-size: 3vw;
+  }
+
+  .card-text {
+    font-size: 2vw;
+  }
+}
+
+/* MOVIE-REVIEW */
+
+.movie-review {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
 }
 
 .btn {
@@ -141,15 +211,29 @@ body {
 
 .login {
   width: calc(100% - 20px);
-  background-color: aquamarine;
+  background-color: transparent;
   margin: 10px;
+  color: white;
+}
+
+.login::after{
+  content: '';
+  display: block;
+  width: calc(100% - 20px);
+  /* Adjust the width of the line */
+  height: 1px;
+  background-color: white;
+  margin: 20px 10px;
+  /* Adjust the margin to control the space between .RV and the line */
 }
 
 .IP {
   display: flex;
   flex-wrap: wrap;
-  flex: 1 0 25%; /* 4개의 아이템이 가로로 배열되도록 설정 */
-  padding: 0 5px; /* 각 아이템 간의 간격 설정 */
+  flex: 1 0 25%;
+  /* 4개의 아이템이 가로로 배열되도록 설정 */
+  padding: 0 5px;
+  /* 각 아이템 간의 간격 설정 */
 }
 
 .prevID {
@@ -157,8 +241,10 @@ body {
   margin: 10px;
 }
 
-.ID, .PW {
+.ID,
+.PW {
   margin: 10px;
+  border-radius: 5px;
 }
 
 .prevPW {
@@ -172,4 +258,21 @@ body {
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
+  border-radius: 5px;
+  
+}
+
+
+.reviewed {
+  background-color: white;
+  width: calc(97.5% - 20px);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+#modify,
+#remove {
+  border-radius: 5px;
 }
