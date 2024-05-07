@@ -177,7 +177,6 @@ const renderMovies = movies => {
       localStorage.setItem('movie', JSON.stringify(movie));
       localStorage.setItem('page', currentPage);
       //새로운 페이지 URL 생성
-      // const newPageURL = `detail.html`;
       const newPageURL = `movie-detail.html`;
       // 새로운 페이지로 이동
       window.location.href = newPageURL;
