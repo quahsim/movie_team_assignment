@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
     PWInput.value = maskedValue;
 
     // PW 유효성 체크
-    if (!validatePW(PWValue)) {
+    if (!validatePW(PWValue)) { // inputValue
       alert('PW는 최소 8자 이상이어야 하며, 영문 대소문자와 숫자를 포함해야 합니다.');
       return;
     }
