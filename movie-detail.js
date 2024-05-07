@@ -2,6 +2,19 @@ document.addEventListener('DOMContentLoaded', function () {
   // 로컬 스토리지에 저장되어 있는 movie 가져오기
   const movie = JSON.parse(localStorage.getItem('movie'));
 
+  // 별 아이콘의 갯수를 계산
+  function calculateStar(vote_average) {
+    let resultStar = "";
+    // 10점만점이므로 아이콘 10개를 생성한다.
+    for (let i = 0; i < 10; i++) {
+      // 이 때 i보다 vote_average가 낮다면 속이 빈 star를 출력한다.
+      resultStar += vote_average < i ? `<i class="bi bi-star"></i>` :
+        // vote_average에서 -1를 뺀 값과 i를 비교하여 star-fill과 star-half를 결정한다.
+        vote_average - 1 < i ? `<i class="bi bi-star-half"></i>` : `<i class="bi bi-star-fill"></i>`;
+    }
+    return resultStar;
+  }
+
   // 영화 정보가 로컬 스토리지에 저장되어 있는지 확인
   if (movie) {
     const movieDetailContainer = document.getElementById('movie-detail');
@@ -13,10 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h1 class="card-title">${movie.title}</h1>
-                            <br></br>
-                            <p class="card-text">${movie.overview}</p>
-                            <p class="card-text"><small class="text-body-secondary"> Rating : ${movie.vote_average}</small></p>
+                        <h5 class="card-title">${movie.title}</h5>
+                        <p class="card-text">${movie.overview}</p>
+                        <p class="card-text"><small class="text-body-secondary"> Rating : ${calculateStar(movie.vote_average)}
+                            <br></br>${movie.vote_average}</small></p>
                         </div>
                     </div>
                     <button type="button" class="btn btn-secondary" id="back-button">Back</button>
@@ -46,13 +59,27 @@ document.addEventListener('DOMContentLoaded', function () {
     console.error('영화 정보를 찾을 수 없습니다.');
   }
 
-  // 돌아가기 버튼 기능
+  //돌아가기 버튼 기능
   const backBtn = document.getElementById("back-button");
   backBtn.addEventListener('click', () => {
+    // 상세 페이지로 왔다는 것을 표시
+    localStorage.setItem('fromIndex', 'true');
     // 타이틀 페이지로 이동
-    localStorage.removeItem('movie');
     window.location.href = 'index.html';
   });
+
+  //html창이 종료될 때 
+  window.addEventListener('unload', function () {
+    localStorage.removeItem('movie'); //상세정보를 가져오기위해 생성한 movie를 삭제함
+  });
+
+  // // 돌아가기 버튼 기능
+  // const backBtn = document.getElementById("back-button");
+  // backBtn.addEventListener('click', () => {
+  //   // 타이틀 페이지로 이동
+  //   localStorage.removeItem('movie');
+  //   window.location.href = 'index.html';
+  // });
 
   //리뷰 작성 기능
   const IDInput = document.getElementById('ID');
@@ -61,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const FinishBtn = document.getElementById('Finish');
 
   const reviewElement = document.querySelector('.review');
+
+
 
   // PW 유효성 체크 함수
   function validatePW(password) {
@@ -74,9 +103,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputValue = PWInput.value.trim();
     const length = inputValue.length;
 
-    // // 입력된 값 대신 *로 표시
-    // const maskedValue = '*'.repeat(length);
-    // PWInput.value = maskedValue;
+    // 입력된 값 대신 *로 표시
+    const maskedValue = '*'.repeat(length);
+    PWInput.value = maskedValue;
   });
 
   // Finish 버튼 클릭 시 저장
