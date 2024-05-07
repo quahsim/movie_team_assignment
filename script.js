@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
   async function displayTopRatedMovies() {
     try {
       //캐쉬가 있으면 캐쉬를 불러옴
-      topRatedMovies = localStorage.getItem('cache_movies') === null ? await fetchAllTopRatedMovies() : JSON.parse(localStorage.getItem('cache_movies')); 
+      // 조건 === null이라면 ? await fetchAllTopRatedMovies() : 아니라면 ~~
+      topRatedMovies = localStorage.getItem('cache_movies') === null ? await fetchAllTopRatedMovies() : JSON.parse(localStorage.getItem('cache_movies'));
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -94,15 +95,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // 각 페이지 링크에 이벤트 리스너 추가
     const pageLinks = pagination.querySelectorAll('.page-item');
     pageLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            // 선택된 페이지에 active 클래스 추가
-            pageLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            this.classList.add('active');
-            currentPage = event.target.textContent; //현재 페이지를 갱신한다.
-            localStorage.removeItem('searchValue'); //검색 결과를 삭제한다. 
+      link.addEventListener('click', function (event) {
+        // 선택된 페이지에 active 클래스 추가
+        pageLinks.forEach(link => {
+          link.classList.remove('active');
         });
+        this.classList.add('active');
+        currentPage = event.target.textContent; //현재 페이지를 갱신한다.
+        localStorage.removeItem('searchValue'); //검색 결과를 삭제한다. 
+      });
     });
   }
 
