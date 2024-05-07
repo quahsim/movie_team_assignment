@@ -16,14 +16,18 @@ function saveSearchValue(value) {
 
 //이전 검색 결과가 있으면 불러온다
 function loadingSearchValue(data) {
-  const searchTerm_storage = JSON.parse(localStorage.getItem('searchValue')); //JSON파일을 다시 문자열로 바꾼다.
+  //JSON파일을 다시 문자열로 바꾼다.
+  const searchTerm_storage = JSON.parse(localStorage.getItem('searchValue'));
 
-  if (searchTerm_storage === null || localStorage.getItem('fromIndex') === null) { //만약 저장된 검색 결과가 없으면 영화 카드를 모두 생성한다.
+  //만약 저장된 검색 결과가 없으면 영화 카드를 모두 생성한다.
+  if (searchTerm_storage === null || localStorage.getItem('fromIndex') === null) {
     renderMovies(data);
     return;
   }
-  localStorage.removeItem('fromIndex'); // 필요없어졌으므로 삭제
-  const filteredMovies = data.filter(movie => movie.title.toLowerCase().includes(searchTerm_storage)); //저장된 검색 결과가 있으면 검색한 결과만 생성한다.
+  // 필요없어졌으므로 삭제
+  localStorage.removeItem('fromIndex');
+  //저장된 검색 결과가 있으면 검색한 결과만 생성한다.
+  const filteredMovies = data.filter(movie => movie.title.toLowerCase().includes(searchTerm_storage));
   renderMovies(filteredMovies);
 }
 
@@ -75,8 +79,7 @@ const renderMovies = movies => {
       // 클릭된 영화 카드의 ID 가져오기
       const clickedMovieId = event.currentTarget.id;
       //새로운 페이지 URL 생성
-      // const newPageURL = `detail.html`;
-      const newPageURL = `detail.html`;
+      const newPageURL = `movie-detail.html`;
       // 새로운 페이지로 이동
       window.location.href = newPageURL;
     })
