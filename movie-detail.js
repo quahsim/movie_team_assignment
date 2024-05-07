@@ -38,23 +38,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="movie-review">
                     <div class="login">
                         <div class="IP">
-                          <p class="prevID">ID : </p>
-                          <input type="text" class="ID col" id="ID" placeholder=" ID...">
-                          <p class="prevPW">PW : </p>
-                          <input type="text" class="PW col" id="PW" placeholder=" PASSWORD...">
+                            <p class="prevID">ID : </p>
+                            <input type="text" class="ID col" id="ID" placeholder=" ID...">
+                            <p class="prevPW">PW : </p>
+                            <input type="text" class="PW col" id="PW" placeholder=" PASSWORD...">
                         </div>
                         <input type="text" class="RV" id="RV">
                         <button type="button" class="btn btn-secondary" id="Finish">Finish</button>
                     </div>
-                    <div class="reviewed">
-                        <p class="review">review review review review review review </p>
-                        <div class="col">
-                            <button type="button" class="mod btn-secondary" id="modify">mofify</button>
-                            <button type="button" class="rem btn-secondary" id="remove">delete</button>
-                        </div>
+                    <div id="reviewList" class="reviewed">
+                        <!-- 리뷰들이 여기에 동적으로 추가됩니다 -->
                     </div>
                 </div>
             </div>`;
+
+    // 이전에 저장된 리뷰들 출력
+    const reviewListContainer = document.getElementById('reviewList');
+    const storedReview = localStorage.getItem('Review');
+    if (storedReview) {
+      const reviews = storedReview.split('\n');
+      reviews.forEach(review => {
+        const reviewElement = document.createElement('div');
+        reviewElement.classList.add('row');
+        reviewElement.innerHTML = `
+                    <div class="col">
+                        <p class="review">${review}</p>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="mod btn-secondary" id="modify">mofify</button>
+                        <button type="button" class="rem btn-secondary" id="remove">delete</button>
+                    </div>
+                `;
+        reviewListContainer.appendChild(reviewElement);
+      });
+    }
   } else {
     console.error('영화 정보를 찾을 수 없습니다.');
   }
@@ -73,23 +90,13 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.removeItem('movie'); //상세정보를 가져오기위해 생성한 movie를 삭제함
   });
 
-  // // 돌아가기 버튼 기능
-  // const backBtn = document.getElementById("back-button");
-  // backBtn.addEventListener('click', () => {
-  //   // 타이틀 페이지로 이동
-  //   localStorage.removeItem('movie');
-  //   window.location.href = 'index.html';
-  // });
-
   //리뷰 작성 기능
   const IDInput = document.getElementById('ID');
   const PWInput = document.getElementById('PW');
   const RVInput = document.getElementById('RV');
   const FinishBtn = document.getElementById('Finish');
 
-  const reviewElement = document.querySelector('.review');
-
-
+  // const reviewElement = document.querySelector('.review');
 
   // PW 유효성 체크 함수
   function validatePW(password) {
@@ -106,6 +113,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // 입력된 값 대신 *로 표시
     const maskedValue = '*'.repeat(length);
     PWInput.value = maskedValue;
+
+    // PW 유효성 체크
+    if (!validatePW(PWValue)) {
+      alert('PW는 최소 8자 이상이어야 하며, 영문 대소문자와 숫자를 포함해야 합니다.');
+      return;
+    }
   });
 
   // Finish 버튼 클릭 시 저장
@@ -120,16 +133,27 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // PW 유효성 체크
-    if (!validatePW(PWValue)) {
-      alert('PW는 최소 8자 이상이어야 하며, 영문 대소문자와 숫자를 포함해야 합니다.');
-      return;
+    // // PW 유효성 체크
+    // if (!validatePW(PWValue)) {
+    //   alert('PW는 최소 8자 이상이어야 하며, 영문 대소문자와 숫자를 포함해야 합니다.');
+    //   return;
+    // }
+
+    // 이전에 저장된 리뷰 가져오기
+    let storedReview = localStorage.getItem('Review');
+
+    // 이전에 저장된 리뷰가 있으면 현재 입력한 리뷰를 누적하여 저장
+    if (storedReview) {
+      // 이전에 저장된 리뷰와 현재 입력한 리뷰를 줄바꿈으로 구분하여 합침
+      storedReview += '\n' + RVValue;
+    } else {
+      storedReview = RVValue; // 이전에 저장된 리뷰가 없으면 현재 입력한 리뷰만 저장
     }
 
     // 로컬 스토리지에 저장
     localStorage.setItem('ID', IDValue);
     localStorage.setItem('PW', PWValue);
-    localStorage.setItem('Review', RVValue);
+    localStorage.setItem('Review', RVValue, storedReview);
 
     // 저장되었다는 메세지
     alert('리뷰가 작성되었습니다.');
@@ -138,16 +162,24 @@ document.addEventListener('DOMContentLoaded', function () {
     IDInput.value = '';
     PWInput.value = '';
     RVInput.value = '';
+
+    // 리뷰 영역에 모든 저장된 리뷰 출력
+    const reviewListContainer = document.getElementById('reviewList');
+    reviewListContainer.innerHTML = ''; // 기존 리뷰 초기화
+    const reviews = storedReview.split('\n');
+    reviews.forEach(review => {
+      const reviewElement = document.createElement('div');
+      reviewElement.classList.add('row');
+      reviewElement.innerHTML = `
+                <div class="col">
+                    <p class="review">${review}</p>
+                </div>
+                <div class="col">
+                    <button type="button" class="mod btn-secondary" id="modify">mofify</button>
+                    <button type="button" class="rem btn-secondary" id="remove">delete</button>
+                </div>
+            `;
+      reviewListContainer.appendChild(reviewElement);
+    });
   });
-
-  // 페이지 로드 시 저장된 값 불러오기
-  const storedID = localStorage.getItem('ID');
-  const storedPW = localStorage.getItem('PW');
-  const storedReview = localStorage.getItem('Review');
-
-  // 저장된 값이 있다면 리뷰에 출력
-  if (storedReview) {
-    // RVInput.value = storedReview;
-    reviewElement.textContent = storedReview;
-  }
 });
