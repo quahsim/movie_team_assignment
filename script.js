@@ -208,7 +208,7 @@ title.addEventListener('click', () => {
 const searchBtn = document.getElementById('search-button');
 searchBtn.addEventListener('click', searchMovies);
 searchBtn.addEventListener('click', function () {
-  var img = this.querySelector('img');
+  let img = this.querySelector('img');
   img.style.transform = 'scale(0.8)';
   setTimeout(function () {
     img.style.transform = 'scale(1)';
