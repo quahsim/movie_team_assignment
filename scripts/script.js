@@ -8,7 +8,7 @@ const options = {
 };
 
 //총 페이지 수
-const totalPages = 5;
+const totalPages = 10;
 // 현재 페이지
 let currentPage = 1;
 
