@@ -205,11 +205,11 @@ title.addEventListener('click', () => {
   location.reload();
 });
 
-// //검색 버튼 기능 + hover 기능 추가
+// 검색 버튼 기능 + hover 기능 추가
 const searchBtn = document.getElementById('search-button');
 searchBtn.addEventListener('click', searchMovies);
 searchBtn.addEventListener('click', function () {
-  var img = this.querySelector('img');
+  let img = this.querySelector('img');
   img.style.transform = 'scale(0.8)';
   setTimeout(function () {
     img.style.transform = 'scale(1)';
