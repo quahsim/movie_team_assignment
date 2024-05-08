@@ -8,7 +8,7 @@ export const options = {
 };
 
 //TMDB API에서 제일 인기있는 영화들을 fetch
-async function fetchTopRatedMovies(page) {
+async function fetchTopRatedMovies(baseUrl, page) {
     const url = `${baseUrl}${page}`;
     try {
         const response = await fetch(url, options);
@@ -20,10 +20,10 @@ async function fetchTopRatedMovies(page) {
     }
 }
 //모든 페이지를 불러옴
-export async function fetchAllTopRatedMovies(totalPages) {
+export async function fetchAllTopRatedMovies(baseUrl, totalPages) {
     let allMovies = [];
     for (let i = 1; i <= totalPages; i++) {
-        const movies = await fetchTopRatedMovies(i);
+        const movies = await fetchTopRatedMovies(baseUrl, i);
         allMovies = allMovies.concat(movies);
     }
     localStorage.setItem('cache_movies', JSON.stringify(allMovies));
