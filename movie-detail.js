@@ -57,18 +57,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 이전에 저장된 리뷰들 출력
     // 로컬스토리지로부터 키가 Review인 값을 가져와서 JSON 형식으로 파싱함. null이나 undefined면 빈배열인 []를 사용함
-    const storedReview = JSON.parse(localStorage.getItem('Review')) || [];
+    let storedReview = JSON.parse(localStorage.getItem('Review')) || [];
+    console.log(storedReview);
     storedReview.forEach(review => {
       if (review.movieId === movie.id) {
         const reviewElement = document.createElement('div');
         reviewElement.classList.add('row');
         reviewElement.innerHTML = `
                   <div class="col">
+                      <p class="reviewID">${review.ID} : </p>
                       <p class="review">${review.content}</p>
                   </div>
                   <div class="col">
                       <button type="button" class="mod btn-secondary" id="modify">mofify</button>
-                      <button type="button" class="rem btn-secondary" id="remove">delete</button>
+                      <button type="button" class="rem btn-secondary" id="remove" data-review-id="${review.id}">delete</button>
                   </div>
               `;
         reviewListContainer.appendChild(reviewElement);
@@ -78,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     console.error('영화 정보를 찾을 수 없습니다.');
   }
+
+  storedReview = JSON.parse(localStorage.getItem('Review')) || [];
 
   //돌아가기 버튼 기능
   const backBtn = document.getElementById("back-button");
@@ -194,32 +198,56 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // 삭제 버튼에 대한 클릭 이벤트 리스너 추가
-    const deleteButtons = document.querySelectorAll('.rem');
-    deleteButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        const reviewId = button.getAttribute('data-review-id');
-        // 리뷰 객체 가져오기
-        const review = storedReview.find(review => review.id === reviewId);
-        // 비밀번호 확인
-        const inputPassword = prompt('리뷰를 삭제하려면 비밀번호를 입력하세요:');
-        if (inputPassword === review.PWValue) {
-            alert('리뷰가 성공적으로 삭제됐습니다.');
-            // 저장된 리뷰에서 해당 ID를 가진 리뷰를 찾아서 제거
-            storedReview = storedReview.filter(review => review.id !== reviewId);
-            // 변경된 리뷰 목록을 로컬 스토리지에 다시 저장
-            localStorage.setItem('Review', JSON.stringify(storedReview));
-            // 변경된 내용을 화면에서도 반영하기 위해 해당 리뷰 요소 제거
-            button.parentElement.parentElement.remove();
-        } else {
-            alert('ID, 비밀번호가 틀렸습니다.');
-            return;
-        }
-      });
-    });
+    // // 삭제 버튼에 대한 클릭 이벤트 리스너 추가
+    // const deleteButtons = document.querySelectorAll('.rem');
+    // deleteButtons.forEach(button => {
+    //   button.addEventListener('click', function () {
+    //     const reviewId = button.getAttribute('data-review-id');
+    //     // 리뷰 객체 가져오기
+    //     const review = storedReview.find(review => review.id === reviewId);
+    //     // 비밀번호 확인
+    //     const inputPassword = prompt('리뷰를 삭제하려면 비밀번호를 입력하세요:');
+    //     if (inputPassword === review.PWValue) {
+    //         alert('리뷰가 성공적으로 삭제됐습니다.');
+    //         // 저장된 리뷰에서 해당 ID를 가진 리뷰를 찾아서 제거
+    //         storedReview = storedReview.filter(review => review.id !== reviewId);
+    //         // 변경된 리뷰 목록을 로컬 스토리지에 다시 저장
+    //         localStorage.setItem('Review', JSON.stringify(storedReview));
+    //         // 변경된 내용을 화면에서도 반영하기 위해 해당 리뷰 요소 제거
+    //         button.parentElement.parentElement.remove();
+    //     } else {
+    //         alert('ID, 비밀번호가 틀렸습니다.');
+    //         return;
+    //     }
+    //   });
+    // });
   });
   // 고유한 id 생성 함수
   function generateUniqueId() {
     return Math.random().toString(36).substr(2, 9); // 랜덤 문자열 생성
   }
+
+  // 삭제 버튼에 대한 클릭 이벤트 리스너 추가
+  const deleteButtons = document.querySelectorAll('.rem');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const reviewId = button.getAttribute('data-review-id');
+      // 리뷰 객체 가져오기
+      const review = storedReview.find(review => review.id === reviewId);
+      // 비밀번호 확인
+      const inputPassword = prompt('리뷰를 삭제하려면 비밀번호를 입력하세요:');
+      if (inputPassword === review.PWValue) {
+          alert('리뷰가 성공적으로 삭제됐습니다.');
+          // 저장된 리뷰에서 해당 ID를 가진 리뷰를 찾아서 제거
+          storedReview = storedReview.filter(review => review.id !== reviewId);
+          // 변경된 리뷰 목록을 로컬 스토리지에 다시 저장
+          localStorage.setItem('Review', JSON.stringify(storedReview));
+          // 변경된 내용을 화면에서도 반영하기 위해 해당 리뷰 요소 제거
+          button.parentElement.parentElement.remove();
+      } else {
+          alert('ID, 비밀번호가 틀렸습니다.');
+          return;
+      }
+    });
+  });
 });
