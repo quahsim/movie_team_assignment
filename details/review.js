@@ -61,7 +61,6 @@ export function handleFinishButton(movie) {
                             <p class="review">${review.ID} : ${review.content}</p>
                         </div>
                         <div class="col">
-                            <button type="button" class="mod btn-secondary" id="modify">modify</button>
                             <button type="button" class="rem btn-secondary" id="remove" data-review-id="${review.id}">delete</button>
                         </div>
                     `;
