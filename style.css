@@ -1,21 +1,11 @@
+/*페이지 공통 스타일*/
+
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 body {
   background-color: black;
   font-family: 'Inter', sans-serif;
 }
-
-
-.fas,
-.bi {
-  /*별 아이콘*/
-  font-size: 15px;
-  /* 아이콘 크기 설정 */
-  color: gold;
-  /* 아이콘 색상 설정 */
-}
-
-/* INDEX HTML */
 
 .header-container {
   background-color: black;
@@ -29,6 +19,30 @@ body {
   max-width: 27%;
   height: auto;
 }
+
+/*Pagination 스타일*/
+
+.pagination{
+  margin-left: 55px;
+  margin-top: 20px;
+}
+
+.pagination .page-link { /*페이지네이션 배경 및 폰트 색*/
+  background-color: transparent; 
+  color: white; 
+}
+
+.pagination .page-link:hover { /*페이지네이션 hover시 배경색*/
+  background-color: rgb(44, 44, 44);
+}
+
+.pagination .page-item.active .page-link { /*페이지네이션 현페이지 배경색*/
+  background-color: grey; 
+  border:1px solid white;
+  color: white; 
+}
+
+/* INDEX HTML */
 
 .search {
   display: flex;
@@ -71,11 +85,9 @@ body {
   width: calc(23% - 20px);
   height: auto;
   padding: 5px;
-  margin: 25px 15px 15px 15px;
+  margin: 15px 15px 15px 15px;
   display: flex;
-  /* Use flexbox layout */
   flex-direction: column;
-  /* Arrange child elements vertically */
   box-sizing: border-box;
   border-radius: 5px;
   background-color: rgb(44, 44, 44);
@@ -122,21 +134,19 @@ body {
 /* MOVIE-DETAIL HTML */
 
 #movie-detail {
-  width: 80%; /* Example width, adjust as needed */
-  margin: 0 auto; /* 가운데로 배열 (포스터, 줄거리, 제목, 평 */
+  width: 80%;
+  margin: 0 auto;
+  /* 가운데로 배열 (포스터, 줄거리, 제목, 평 */
   display: flex;
   flex-wrap: wrap;
 }
 
-.movie-info{
+
+.movie-info {
   display: flex;
   flex-direction: center;
   align-items: center;
   justify-content: center;
-}
-
-#back-button{
-  width:85%;
 }
 
 .card {
@@ -147,12 +157,6 @@ body {
   align-items: center;
   background-color: rgb(44, 44, 44);
   color: white;
-}
-
-.card-poster {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 30px;
 }
 
 .card-body {
@@ -173,35 +177,75 @@ body {
   font-style: italic;
 }
 
+.ratings {
+  display: flex;
+  align-items: center;
+  color: grey
+}
+
+.fas,
+.bi {
+  /*별 아이콘*/
+  font-size: 15px;
+  /* 아이콘 크기 설정 */
+  color: gold;
+  /* 아이콘 색상 설정 */
+}
+
+.calculate-star {
+  margin-right: 5px;
+  /* Adjust margin as needed */
+}
+
 /* Adjust font size and layout for smaller screens */
 @media screen and (max-width: 768px) {
   .card {
-    padding: 20px;
-    margin: 20px 5%;
+      padding: 20px;
+      margin: 20px 5%; /*위아래 마진 & 옆 마진*/
+  }
+
+  .card-poster {
+      max-width: 100%; /* Ensures the image does not exceed its container width */
+      height: auto; /* Allows the height to adjust proportionally with the width */
+      margin-bottom: 30px; /* Adjust margin as needed */
+      width: 50%; /* Set the width of the poster relative to its container */
   }
 
   .card-body {
-    width: 70%;
+      width: 70%;
   }
 
   .card-title {
-    font-size: 3vw;
+      font-size: 3vw; /*viewpoint*/
   }
 
   .card-text {
-    font-size: 2vw;
+      font-size: 2vw;
   }
+
+  .ratings {
+      font-size: 2vw;
+  }
+
+  .calculate-star {
+      font-size: 1vw;
+  }
+}
+
+#back-button {
+  margin-top: 40px;
+  width: 30%;
 }
 
 /* MOVIE-REVIEW */
 
 .movie-review {
-  margin-top: 10px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid white;
+  border: 1px solid grey;
 }
 
 .btn {
@@ -214,20 +258,23 @@ body {
   background-color: transparent;
   margin: 10px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.login::after{
+.login::after {
   content: '';
   display: block;
   width: calc(100% - 20px);
   /* Adjust the width of the line */
   height: 1px;
-  background-color: white;
+  background-color: grey;
   margin: 20px 10px;
   /* Adjust the margin to control the space between .RV and the line */
 }
 
-.IP {
+.IP { /*아이디 & 비번*/
   display: flex;
   flex-wrap: wrap;
   flex: 1 0 25%;
@@ -236,41 +283,28 @@ body {
   /* 각 아이템 간의 간격 설정 */
 }
 
-.prevID {
-  font-weight: bold;
-  margin: 10px;
-}
-
-.ID,
-.PW {
-  margin: 10px;
-  border-radius: 5px;
-}
-
+.prevID,
 .prevPW {
   font-weight: bold;
   margin: 10px;
 }
 
-.RV {
+.ID,
+.PW { /*아이디 & 비번 입력칸*/
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.RV { /*리뷰 등록 버튼*/
   width: calc(100% - 20px);
   height: 50px;
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
   border-radius: 5px;
-  
 }
 
-.reviewID {
-  color: red;
-}
-
-.review {
-  color: black;
-}
-
-.reviewed {
+.reviewed { /*등록된 리뷰들 칸*/
   background-color: white;
   width: calc(97.5% - 20px);
   padding: 10px;
@@ -278,9 +312,11 @@ body {
   margin-top: 5px;
   margin-bottom: 20px;
   color: black;
+  height: 50px;
 }
 
 #modify,
 #remove {
   border-radius: 5px;
+  margin-left: auto;
 }
