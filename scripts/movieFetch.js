@@ -20,7 +20,7 @@ async function fetchTopRatedMovies(page) {
     }
 }
 //모든 페이지를 불러옴
-export async function fetchAllTopRatedMovies() {
+export async function fetchAllTopRatedMovies(totalPages) {
     let allMovies = [];
     for (let i = 1; i <= totalPages; i++) {
         const movies = await fetchTopRatedMovies(i);

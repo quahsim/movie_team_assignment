@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             //캐쉬가 있으면 캐쉬를 불러옴
             // 조건 === null이라면 ? await fetchAllTopRatedMovies() : 아니라면 ~~
-            topRatedMovies = localStorage.getItem('cache_movies') === null ? await fetchAllTopRatedMovies() : JSON.parse(localStorage.getItem('cache_movies'));
+            topRatedMovies = localStorage.getItem('cache_movies') === null ? await fetchAllTopRatedMovies(totalPages) : JSON.parse(localStorage.getItem('cache_movies'));
         } catch (error) {
             console.error('Error fetching data:', error);
         }
