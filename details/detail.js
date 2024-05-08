@@ -1,5 +1,5 @@
 import { calculateStar } from "./calculateStar.js";
-import { handleFinishButton } from "./finish.js";
+import { handleFinishButton } from "./review.js";
 import { handleDeleteButtons } from "./delete.js";
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -58,8 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
           reviewElement.classList.add('row');
           reviewElement.innerHTML = `
                     <div class="col">
-                        <p class="reviewID">${review.ID} : </p>
-                        <p class="review">${review.content}</p>
+                        <p class="review">${review.ID} : ${review.content}</p>
                     </div>
                     <div class="col">
                         <button type="button" class="rem btn-secondary" id="remove" data-review-id="${review.id}">delete</button>

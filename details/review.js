@@ -57,8 +57,7 @@ export function handleFinishButton(movie) {
                 reviewElement.classList.add('row');
                 reviewElement.innerHTML = `
                         <div class="col">
-                            <p class="reviewID">${review.ID} : </p>
-                            <p class="review">${review.content}</p>
+                            <p class="review">${review.ID} : ${review.content}</p>
                         </div>
                         <div class="col">
                             <button type="button" class="mod btn-secondary" id="modify">modify</button>
