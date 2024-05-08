@@ -1,5 +1,6 @@
 import { validatePW } from "./validation.js";
 import { generateUniqueId } from "./generateUniqueId.js";
+import { handleDeleteButtons } from "./delete.js";
 
 export function handleFinishButton(movie) {
     const IDInput = document.getElementById('ID');
@@ -67,5 +68,6 @@ export function handleFinishButton(movie) {
                 reviewListContainer.appendChild(reviewElement);
             }
         });
+        handleDeleteButtons(storedReview);
     });
 }
