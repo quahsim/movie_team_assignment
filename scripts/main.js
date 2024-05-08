@@ -6,6 +6,9 @@ const totalPages = 10;
 // 현재 페이지
 export let currentPageObj = {currentPage: 1};
 
+//베이스 url
+const baseUrl = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=`;
+
 //검색 정보를 저장
 let saveSearchValue = value => localStorage.setItem('searchValue', JSON.stringify(value));
 
@@ -51,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             //캐쉬가 있으면 캐쉬를 불러옴
             // 조건 === null이라면 ? await fetchAllTopRatedMovies() : 아니라면 ~~
-            topRatedMovies = localStorage.getItem('cache_movies') === null ? await fetchAllTopRatedMovies(totalPages) : JSON.parse(localStorage.getItem('cache_movies'));
+            topRatedMovies = localStorage.getItem('cache_movies') === null ? await fetchAllTopRatedMovies(baseUrl, totalPages) : JSON.parse(localStorage.getItem('cache_movies'));
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -71,7 +74,6 @@ const searchMovies = async () => {
     if (!searchTerm) return;
 
     saveSearchValue(searchTerm); //검색 정보를 저장
-
     const filteredMovies = topRatedMovies.filter(movie => movie.title.toLowerCase().includes(searchTerm));
     renderMovies(filteredMovies, currentPageObj.currentPage);
 };
