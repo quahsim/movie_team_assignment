@@ -21,11 +21,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="card-body">
                         <h5 class="card-title">${movie.title}</h5>
                         <p class="card-text">${movie.overview}</p>
-                        <p class="card-text"><small class="text-body-secondary"> Rating : ${calculateStar(movie.vote_average)}
-                            <br></br>${movie.vote_average}</small></p>
+                        <div class ="ratings">
+                            <p class="calculate-star"><small class="text-body-secondary"> Rating : ${calculateStar(movie.vote_average) }
+                            <p class="vote-average"> ${movie.vote_average}</small></p>
                         </div>
+                      </div>
                     </div>
-                    <button type="button" class="btn btn-secondary" id="back-button">Back</button>
                 </div>
                 
                 <div class="movie-review">
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <!-- 리뷰들이 여기에 동적으로 추가됩니다 -->
                     </div>
                 </div>
+                <button type="button" class="btn btn-secondary" id="back-button">Back</button>
             </div>`;
   
       // 리뷰 목록 컨테이너
