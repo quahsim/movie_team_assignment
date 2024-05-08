@@ -262,6 +262,13 @@ body {
   
 }
 
+.reviewID {
+  color: red;
+}
+
+.review {
+  color: black;
+}
 
 .reviewed {
   background-color: white;
