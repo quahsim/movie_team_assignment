@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <h5 class="card-title">${movie.title}</h5>
                       <p class="card-text">${movie.overview}</p>
                       <div class ="ratings">
-                        <p class="calculate-star"><small class="text-body-secondary"> Rating : ${calculateStar(movie.vote_average)}
+                        <p class="calculate-star"><small class="text-body-secondary"> Rating : ${calculateStar(movie.vote_average) }
                         <p class="vote-average"> ${movie.vote_average}</small></p>
                       </div>
                     </div>
@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
                       <button type="button" class="rem btn-secondary" id="remove" data-review-id="${review.id}">delete</button>
                   </div>
               `;
-        reviewElement.style.marginBottom = '20px';
 
         reviewListContainer.appendChild(reviewElement);
       }
