@@ -8,14 +8,12 @@ const options = {
 };
 
 //총 페이지 수
-const totalPages = 5;
+const totalPages = 10;
 // 현재 페이지
 let currentPage = 1;
 
 //검색 정보를 저장
-function saveSearchValue(value) {
-  localStorage.setItem('searchValue', JSON.stringify(value));
-}
+let saveSearchValue = value => localStorage.setItem('searchValue', JSON.stringify(value));
 
 //베이스 url
 const baseUrl = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=`;
