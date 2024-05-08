@@ -270,7 +270,7 @@ body {
   /* Adjust the width of the line */
   height: 1px;
   background-color: grey;
-  margin: 20px 10px;
+  margin: 10px 20px;
   /* Adjust the margin to control the space between .RV and the line */
 }
 
@@ -298,25 +298,30 @@ body {
 .RV { /*리뷰 등록 버튼*/
   width: calc(100% - 20px);
   height: 50px;
-  margin: 10px;
+  margin: 15px;
   display: flex;
   flex-wrap: wrap;
   border-radius: 5px;
 }
 
 .reviewed { /*등록된 리뷰들 칸*/
-  background-color: white;
+  background-color: transparent;
   width: calc(97.5% - 20px);
   padding: 10px;
   border-radius: 5px;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: black;
   height: 50%;
+}
+
+.reviewed .row{
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 5px;
+  padding-top:15px;
 }
 
 #modify,
 #remove {
   border-radius: 5px;
-  margin-left: auto;
 }

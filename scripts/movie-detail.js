@@ -29,30 +29,30 @@ document.addEventListener('DOMContentLoaded', function () {
                       <h5 class="card-title">${movie.title}</h5>
                       <p class="card-text">${movie.overview}</p>
                       <div class ="ratings">
-                        <p class="calculate-star"><small class="text-body-secondary"> Rating : ${calculateStar(movie.vote_average) }
+                        <p class="calculate-star"><small class="text-body-secondary"> Rating : ${calculateStar(movie.vote_average)}
                         <p class="vote-average"> ${movie.vote_average}</small></p>
                       </div>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-secondary" id="back-button">Back</button>
               </div>
               
               <div class="movie-review">
-                  <div class="login">
-                      <div class="IP">
-                          <p class="prevID">ID : </p>
-                          <input type="text" class="ID col" id="ID" placeholder=" ID...">
-                          <p class="prevPW">PW : </p>
-                          <input type="text" class="PW col" id="PW" placeholder=" PASSWORD...">
-                      </div>
-                      <input type="text" class="RV" id="RV">
-                      <button type="button" class="btn btn-secondary" id="Finish">Finish</button>
-                  </div>
-                  <div id="reviewList" class="reviewed">
-                      <!-- 리뷰들이 여기에 동적으로 추가됩니다 -->
-                  </div>
-              </div>
-          </div>`;
+                    <div class="login">
+                        <div class="IP">
+                            <p class="prevID">ID : </p>
+                            <input type="text" class="ID col" id="ID" placeholder=" ID...">
+                            <p class="prevPW">PW : </p>
+                            <input type="text" class="PW col" id="PW" placeholder=" PASSWORD...">
+                        </div>
+                        <input type="text" class="RV" id="RV">
+                        <button type="button" class="btn btn-secondary" id="Finish">Finish</button>
+                    </div>
+                    <div id="reviewList" class="reviewed">
+                        <!-- 리뷰들이 여기에 동적으로 추가됩니다 -->
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary" id="back-button">Back</button>
+            </div>`;
 
     // 리뷰 목록 컨테이너
     const reviewListContainer = document.getElementById('reviewList');
@@ -71,10 +71,12 @@ document.addEventListener('DOMContentLoaded', function () {
                       <p class="review">${review.content}</p>
                   </div>
                   <div class="col">
-                      <button type="button" class="mod btn-secondary" id="modify">mofify</button>
+                      <button type="button" class="mod btn-secondary" id="modify">modify</button>
                       <button type="button" class="rem btn-secondary" id="remove" data-review-id="${review.id}">delete</button>
                   </div>
               `;
+        reviewElement.style.marginBottom = '20px';
+
         reviewListContainer.appendChild(reviewElement);
       }
     });
@@ -239,16 +241,16 @@ document.addEventListener('DOMContentLoaded', function () {
       // 비밀번호 확인
       const inputPassword = prompt('리뷰를 삭제하려면 비밀번호를 입력하세요:');
       if (inputPassword === review.PWValue) {
-          alert('리뷰가 성공적으로 삭제됐습니다.');
-          // 저장된 리뷰에서 해당 ID를 가진 리뷰를 찾아서 제거
-          storedReview = storedReview.filter(review => review.id !== reviewId);
-          // 변경된 리뷰 목록을 로컬 스토리지에 다시 저장
-          localStorage.setItem('Review', JSON.stringify(storedReview));
-          // 변경된 내용을 화면에서도 반영하기 위해 해당 리뷰 요소 제거
-          button.parentElement.parentElement.remove();
+        alert('리뷰가 성공적으로 삭제됐습니다.');
+        // 저장된 리뷰에서 해당 ID를 가진 리뷰를 찾아서 제거
+        storedReview = storedReview.filter(review => review.id !== reviewId);
+        // 변경된 리뷰 목록을 로컬 스토리지에 다시 저장
+        localStorage.setItem('Review', JSON.stringify(storedReview));
+        // 변경된 내용을 화면에서도 반영하기 위해 해당 리뷰 요소 제거
+        button.parentElement.parentElement.remove();
       } else {
-          alert('ID, 비밀번호가 틀렸습니다.');
-          return;
+        alert('ID, 비밀번호가 틀렸습니다.');
+        return;
       }
     });
   });
